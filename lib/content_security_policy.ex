@@ -9,6 +9,7 @@ defmodule ContentSecurityPolicy do
   documentation.
   """
 
+  alias ContentSecurityPolicy.Directive
   alias ContentSecurityPolicy.Policy
 
   @doc """
@@ -62,5 +63,17 @@ defmodule ContentSecurityPolicy do
 
   defp join_directives_with_spaces(directives) when is_list(directives) do
     Enum.join(directives, " ")
+  end
+
+  @doc """
+  Adds a single source value to a directive on the given policy.
+  """
+  @spec add_source_value(Policy.t(), atom(), String.t()) :: Policy.t()
+  def add_source_value(policy, directive, source_value) do
+    Directive.validate_directive!(directive)
+
+    current_source_values = Map.get(policy, directive) || []
+    new_source_values = [source_value | current_source_values]
+    Map.put(policy, directive, new_source_values)
   end
 end

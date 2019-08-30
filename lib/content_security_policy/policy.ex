@@ -8,6 +8,10 @@ defmodule ContentSecurityPolicy.Policy do
   browser can understand it.
   """
 
+  alias ContentSecurityPolicy.Policy
+
+  @type t :: %Policy{}
+
   defstruct default_src: nil,
     font_src: nil,
     frame_src: nil,
