@@ -8,11 +8,11 @@ defmodule ContentSecurityPolicy.Policy do
   browser can understand it.
   """
 
-  defstruct "default-src": nil,
-    "font-src": nil,
-    "frame-src": nil,
-    "media-src": nil,
-    "script-src": nil,
-    "style-src": nil,
-    "img-src": nil
+  defstruct default_src: nil,
+    font_src: nil,
+    frame_src: nil,
+    media_src: nil,
+    script_src: nil,
+    style_src: nil,
+    img_src: nil
 end

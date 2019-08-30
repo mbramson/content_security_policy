@@ -2,7 +2,14 @@ defmodule ContentSecurityPolicyTest do
   use ExUnit.Case
   doctest ContentSecurityPolicy
 
-  test "greets the world" do
-    assert ContentSecurityPolicy.hello() == :world
+  alias ContentSecurityPolicy.Policy
+  alias ContentSecurityPolicy, as: CSP
+
+  describe "serialize/1" do
+    test "serializes one directive with one source value" do
+      policy = %Policy{default_src: ["'self'"]}
+      assert CSP.serialize(policy) == "default-src 'self';"
+    end
   end
+
 end
