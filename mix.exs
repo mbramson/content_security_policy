@@ -23,6 +23,7 @@ defmodule ContentSecurityPolicy.MixProject do
     [
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
+      {:stream_data, ">= 0.0.0"},
     ]
   end
 end
