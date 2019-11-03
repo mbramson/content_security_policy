@@ -1,5 +1,7 @@
 defmodule ContentSecurityPolicyTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
+  use ExUnitProperties
+
   doctest ContentSecurityPolicy
 
   alias ContentSecurityPolicy.Policy
@@ -30,6 +32,19 @@ defmodule ContentSecurityPolicyTest do
       policy = %Policy{default_src: []}
       new_policy = CSP.add_source_value(policy, :default_src, "https:")
       assert new_policy.default_src == ["https:"]
+    end
+  end
+
+  describe "generate_nonce/1" do
+    property "outputs a base 64 encoded string of `bytes` length" do
+      check all bytes <- integer(1..1000) do
+        base64_encoded_nonce = CSP.generate_nonce(bytes)
+
+        assert {:ok, decoded_nonce} =
+          Base.decode64(base64_encoded_nonce, padding: false)
+
+        assert byte_size(decoded_nonce) == bytes
+      end
     end
   end
 end

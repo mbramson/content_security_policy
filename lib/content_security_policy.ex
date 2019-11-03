@@ -76,4 +76,15 @@ defmodule ContentSecurityPolicy do
     new_source_values = [source_value | current_source_values]
     Map.put(policy, directive, new_source_values)
   end
+
+  @doc """
+  Generates a random base 64 encoded string for use in Content Security Policy
+  nonces.
+  """
+  @spec generate_nonce(bytes :: pos_integer()) :: String.t()
+  def generate_nonce(bytes \\ 32) do
+    bytes
+    |> :crypto.strong_rand_bytes
+    |> Base.encode64(padding: false)
+  end
 end
