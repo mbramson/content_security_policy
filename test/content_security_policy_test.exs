@@ -4,8 +4,8 @@ defmodule ContentSecurityPolicyTest do
 
   doctest ContentSecurityPolicy
 
-  alias ContentSecurityPolicy.Policy
   alias ContentSecurityPolicy, as: CSP
+  alias ContentSecurityPolicy.Policy
 
   import OrderInvariantCompare
 

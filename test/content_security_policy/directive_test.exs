@@ -12,13 +12,8 @@ defmodule ContentSecurityPolicy.DirectiveTest do
       end)
     end
 
-    defp invalid_directive_generator() do
-      StreamData.term()
-      |> StreamData.filter(&(&1 not in TestHelpers.valid_directives()))
-    end
-
     property "raises an ArgumentError for any invalid directive" do
-      check all value <- invalid_directive_generator() do
+      check all value <- TestHelpers.invalid_directive_generator() do
         assert_raise(ArgumentError, ~r/Invalid directive/, fn ->
           Directive.validate_directive!(value)
         end)

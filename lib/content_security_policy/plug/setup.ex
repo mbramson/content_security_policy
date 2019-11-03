@@ -26,7 +26,7 @@ defmodule ContentSecurityPolicy.Plug.Setup do
 
     register_before_send(conn, fn conn ->
       policy_before_send = conn.private[:content_security_policy]
-      serialized_policy = ContentSecurityPolicy.serialize(policy_before_send) 
+      serialized_policy = ContentSecurityPolicy.serialize(policy_before_send)
 
       put_resp_header(conn, "content-security-policy", serialized_policy)
     end)
