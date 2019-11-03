@@ -25,7 +25,7 @@ defmodule ContentSecurityPolicy.MixProject do
       {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
       {:plug, "~> 1.1"},
       {:order_invariant_compare, "~> 1.0.0", only: :test},
-      {:stream_data, ">= 0.0.0"},
+      {:stream_data, ">= 0.0.0", only: :test},
     ]
   end
 end
