@@ -59,5 +59,14 @@ defmodule ContentSecurityPolicy.Plug.AddNonceTest do
         send_response(directives: [:not_a_directive])
       end)
     end
+
+    test "errors when run without running the Setup plug first" do
+      assert_raise(RuntimeError, ~r/policy was not initialized/, fn ->
+        conn = :post
+               |> conn("/foo")
+               |> AddNonce.call([])
+               |> send_resp(200, "ok")
+      end)
+    end
   end
 end
