@@ -75,6 +75,7 @@ defmodule ContentSecurityPolicy do
 
     current_source_values = Map.get(policy, directive) || []
     new_source_values = current_source_values ++ [source_value]
+                        |> Enum.uniq
     Map.put(policy, directive, new_source_values)
   end
 

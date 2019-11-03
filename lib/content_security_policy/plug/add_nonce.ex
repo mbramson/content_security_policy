@@ -2,18 +2,53 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
   @moduledoc """
   Plug which adds a random nonce to the content security policy. Sets this
   nonce in `Plug.assigns` under the `csp_nonce` key.
+
+  ## Example Usage
+
+  In a controller or router:
+
+      plug ContentSecurityPolicy.Setup
+      plug ContentSecurityPolicy.AddNonce directives: [:script_src]
+
+  The nonce is then added to the `script-src` directive and will be sent in the
+  "content-security-policy" response header. To access this nonce value when
+  rendering a response, check `conn.assigns[:csp_nonce]`.
+
+      conn.assigns[:csp_nonce]
+      "EDNnf03nceIOfn39fn3e9h3sdfa"
+
+  If using `.eex` templates to render a response, that might look something
+  like:
+
+      <script nonce="<%= @conn.assigns[:csp_nonce] %>">
+        ... #JavaScript I'd like to be allowed
+      </script>
+
+  When that response is sent to the browser, the `"content-security-policy"`
+  response header will contain `"script-src
+  'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'"`, which should cause the browser to
+  whitelist this specific script.
+
+  Note that the nonce is randomly generated for every single request, which
+  ensures that an attacker can't just guess your nonce and get their malicious
+  script/resource run.
   """
   import Plug.Conn
 
   alias ContentSecurityPolicy.Directive
   alias ContentSecurityPolicy.Policy
 
-  def init(opts) do
-    opts
-  end
-
   @default_directives [:default_src]
   @default_byte_size 32
+
+  def init(opts) do
+    directives = Keyword.get(opts, :directives, @default_directives)
+    Enum.each(directives, fn directive ->
+      Directive.validate_directive!(directive)
+    end)
+
+    opts
+  end
 
   def call(conn, opts) do
     directives = opts
