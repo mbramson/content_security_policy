@@ -68,7 +68,8 @@ defmodule ContentSecurityPolicy do
   @doc """
   Adds a single source value to a directive on the given policy.
   """
-  @spec add_source_value(Policy.t(), atom(), String.t()) :: Policy.t()
+  @spec add_source_value(Policy.t(), Directive.valid_directive(), String.t()) ::
+    Policy.t()
   def add_source_value(policy, directive, source_value) do
     Directive.validate_directive!(directive)
 
