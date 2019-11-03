@@ -3,7 +3,7 @@ defmodule ContentSecurityPolicy.Plug.Setup do
   Plug that sets the default policy and ensures that the proper
   `"content-security-policy"` header is set before the response is sent.
 
-  This `Plug` also registers a `before_send` action that serializes the
+  This `Plug` registers a `before_send` action that serializes the
   `ContentSecurityPolicy.Policy` struct and inserts the result into the
   `"content-security-policy"` header of the response.
   """

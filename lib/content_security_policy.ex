@@ -73,7 +73,7 @@ defmodule ContentSecurityPolicy do
     Directive.validate_directive!(directive)
 
     current_source_values = Map.get(policy, directive) || []
-    new_source_values = [source_value | current_source_values]
+    new_source_values = current_source_values ++ [source_value]
     Map.put(policy, directive, new_source_values)
   end
 

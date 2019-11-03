@@ -4,11 +4,11 @@ defmodule ContentSecurityPolicy.Plug.SetupTest do
 
   alias ContentSecurityPolicy.Policy
 
-  defp send_response(csp_plug_opts \\ []) do
-    conn = :post
-           |> conn("/foo")
-           |> ContentSecurityPolicy.Plug.Setup.call(csp_plug_opts)
-           |> send_resp(200, "ok")
+  defp send_response(setup_plug_opts \\ []) do
+    :post
+    |> conn("/foo")
+    |> ContentSecurityPolicy.Plug.Setup.call(setup_plug_opts)
+    |> send_resp(200, "ok")
   end
 
   describe "call/2" do
