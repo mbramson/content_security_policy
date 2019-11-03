@@ -1,6 +1,7 @@
-defmodule ContentSecurityPolicy.Plug do
+defmodule ContentSecurityPolicy.Plug.Setup do
   @moduledoc """
-  Plug that ensures that we set a valid default ContentSecurityPolicy.
+  Plug that sets the default policy and ensures that the proper
+  `"content-security-policy"` header is set before the response is sent.
 
   This `Plug` also registers a `before_send` action that serializes the
   `ContentSecurityPolicy.Policy` struct and inserts the result into the

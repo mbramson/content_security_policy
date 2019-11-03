@@ -1,4 +1,4 @@
-defmodule ContentSecurityPolicy.PlugTest do
+defmodule ContentSecurityPolicy.Plug.SetupTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
@@ -7,7 +7,7 @@ defmodule ContentSecurityPolicy.PlugTest do
   defp send_response(csp_plug_opts \\ []) do
     conn = :post
            |> conn("/foo")
-           |> ContentSecurityPolicy.Plug.call(csp_plug_opts)
+           |> ContentSecurityPolicy.Plug.Setup.call(csp_plug_opts)
            |> send_resp(200, "ok")
   end
 
