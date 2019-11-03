@@ -3,12 +3,13 @@ defmodule ContentSecurityPolicy.Plug.AddNonceTest do
   use Plug.Test
 
   alias ContentSecurityPolicy.Plug.AddNonce
+  alias ContentSecurityPolicy.Plug.Setup
 
   defp send_response(add_nonce_plug_opts \\ []) do
     :post
     |> conn("/foo")
-    |> ContentSecurityPolicy.Plug.Setup.call([])
-    |> ContentSecurityPolicy.Plug.AddNonce.call(add_nonce_plug_opts)
+    |> Setup.call([])
+    |> AddNonce.call(add_nonce_plug_opts)
     |> send_resp(200, "ok")
   end
 

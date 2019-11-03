@@ -11,6 +11,23 @@ defmodule ContentSecurityPolicy.Directive do
 
   alias ContentSecurityPolicy.Policy
 
+  @opaque valid_directive ::
+    :child_src
+    | :connect_src
+    | :default_src
+    | :font_src
+    | :form_action
+    | :frame_ancestors
+    | :frame_src
+    | :img_src
+    | :media_src
+    | :object_src
+    | :plugin_types
+    | :report_uri
+    | :sandbox
+    | :script_src
+    | :style_src
+
   @valid_directives Policy.__struct__()
                     |> Map.keys()
                     |> Enum.reject(&(&1 == :__struct__))
@@ -21,7 +38,7 @@ defmodule ContentSecurityPolicy.Directive do
 
   Raises an `ArgumentError` if the directive is not valid.
   """
-  @spec validate_directive!(atom()) :: :ok | no_return()
+  @spec validate_directive!(valid_directive()) :: :ok
   def validate_directive!(:child_src), do: :ok
   def validate_directive!(:connect_src), do: :ok
   def validate_directive!(:default_src), do: :ok

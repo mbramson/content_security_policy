@@ -4,21 +4,18 @@ defmodule ContentSecurityPolicy.DirectiveTest do
 
   alias ContentSecurityPolicy.Directive
   alias ContentSecurityPolicy.Policy
-
-  @valid_directives Policy.__struct__() 
-                    |> Map.keys() 
-                    |> Enum.reject(&(&1 == :__struct__))
+  alias ContentSecurityPolicy.TestHelpers
 
   describe "validate_directive!/1" do
     property "returns :ok for all keys of the Property struct" do
-      Enum.each(@valid_directives, fn directive ->
+      Enum.each(TestHelpers.valid_directives(), fn directive ->
         assert Directive.validate_directive!(directive) == :ok
       end)
     end
 
     defp invalid_directive_generator() do
       StreamData.term()
-      |> StreamData.filter(&(&1 not in @valid_directives))
+      |> StreamData.filter(&(&1 not in TestHelpers.valid_directives()))
     end
 
     property "raises an ArgumentError for any invalid directive" do
