@@ -16,7 +16,10 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
   @default_byte_size 32
 
   def call(conn, opts) do
-    directives = Keyword.get(opts, :directives, @default_directives)
+    directives = opts
+                 |> Keyword.get(:directives, @default_directives)
+                 |> Enum.uniq
+
     bytes = Keyword.get(opts, :byte_size, @default_byte_size)
 
     nonce = ContentSecurityPolicy.generate_nonce(bytes)

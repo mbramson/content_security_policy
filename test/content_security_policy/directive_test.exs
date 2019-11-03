@@ -3,7 +3,6 @@ defmodule ContentSecurityPolicy.DirectiveTest do
   use ExUnitProperties
 
   alias ContentSecurityPolicy.Directive
-  alias ContentSecurityPolicy.Policy
   alias ContentSecurityPolicy.TestHelpers
 
   describe "validate_directive!/1" do
@@ -26,5 +25,4 @@ defmodule ContentSecurityPolicy.DirectiveTest do
       end
     end
   end
-
 end
