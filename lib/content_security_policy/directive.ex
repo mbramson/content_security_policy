@@ -22,11 +22,19 @@ defmodule ContentSecurityPolicy.Directive do
   Raises an `ArgumentError` if the directive is not valid.
   """
   @spec validate_directive!(atom()) :: :ok | no_return()
+  def validate_directive!(:child_src), do: :ok
+  def validate_directive!(:connect_src), do: :ok
   def validate_directive!(:default_src), do: :ok
   def validate_directive!(:font_src), do: :ok
+  def validate_directive!(:form_action), do: :ok
+  def validate_directive!(:frame_ancestors), do: :ok
   def validate_directive!(:frame_src), do: :ok
   def validate_directive!(:img_src), do: :ok
   def validate_directive!(:media_src), do: :ok
+  def validate_directive!(:object_src), do: :ok
+  def validate_directive!(:plugin_types), do: :ok
+  def validate_directive!(:report_uri), do: :ok
+  def validate_directive!(:sandbox), do: :ok
   def validate_directive!(:script_src), do: :ok
   def validate_directive!(:style_src), do: :ok
 
