@@ -18,7 +18,7 @@ defmodule ContentSecurityPolicy.Plug.AddSourceValueTest do
 
   describe "call/2" do
     property "adds source values to corresponding directives" do
-      check all valid_directives_with_source_values <- 
+      check all valid_directives_with_source_values <-
         TestHelpers.list_of_valid_directive_source_value_pairs_generator()
       do
         conn = send_response(valid_directives_with_source_values)
@@ -31,18 +31,18 @@ defmodule ContentSecurityPolicy.Plug.AddSourceValueTest do
           assert {:ok, regex_for_this_pair} = Regex.compile(match)
           assert csp_header =~ regex_for_this_pair
         end)
-      end     
+      end
     end
 
     test "raises an error if given an invalid directive" do
       assert_raise(ArgumentError, ~r/Invalid directive/, fn ->
-        conn = send_response(not_a_directive: "doesnt matter")
+        send_response(not_a_directive: "doesnt matter")
       end)
     end
 
     test "raises an error if given no directive source value pairs" do
       assert_raise(ArgumentError, ~r/No directive and source value supplied/, fn ->
-        conn = send_response([])
+        send_response([])
       end)
     end
   end

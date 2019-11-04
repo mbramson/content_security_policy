@@ -35,6 +35,7 @@ defmodule ContentSecurityPolicy.Plug.AddSourceValue do
   alias ContentSecurityPolicy.Directive
   alias ContentSecurityPolicy.Policy
 
+  def init([]), do: raise_no_arguments_error()
   def init(opts) do
     Enum.each(opts, fn {directive, _source_value} ->
       Directive.validate_directive!(directive)
@@ -69,7 +70,7 @@ defmodule ContentSecurityPolicy.Plug.AddSourceValue do
     """
   end
 
-  defp raise_no_arguments_error() do
+  defp raise_no_arguments_error do
     raise ArgumentError, """
     No directive and source value supplied to the
     `ContentSecurityPolicy.Plug.AddSourceValue` plug.
