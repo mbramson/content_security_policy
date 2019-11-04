@@ -19,7 +19,6 @@ defmodule ContentSecurityPolicy.Plug.Setup do
   @default_policy %Policy{default_src: ["'self'"]}
 
   def call(conn, opts) do
-    generate_random_nonce = Keyword.get(opts, :generate_random_nonce, false)
     policy = Keyword.get(opts, :default_policy, @default_policy)
 
     conn = put_private(conn, :content_security_policy, policy)
