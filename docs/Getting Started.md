@@ -78,7 +78,7 @@ following plug to our Router (in the appropriate pipeline or place, of course).
 
 ```elixir
 plug ContentSecurityPolicy.Plug.Setup(
-  %ContentSecurityPolicy.Policy{
+  default_policy: %ContentSecurityPolicy.Policy{
     default_src: ["https:", "'self'"],
     img_src: ["https://imgur.com"]
   }
