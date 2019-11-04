@@ -3,6 +3,9 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
   Plug which adds a random nonce to the content security policy. Sets this
   nonce in `Plug.assigns` under the `csp_nonce` key.
 
+  This plug must be run after the `ContentSecurityPolicy.Setup` plug, or it
+  will raise an exception.
+
   ## Example Usage
 
   In a controller or router:
@@ -24,7 +27,7 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
         ... #JavaScript I'd like to be allowed
       </script>
 
-  When that response is sent to the browser, the `"content-security-policy"`
+  When the response is sent to the browser, the `"content-security-policy"`
   response header will contain `"script-src
   'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'"`, which should cause the browser to
   whitelist this specific script.
@@ -63,7 +66,6 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
     existing_policy = get_policy!(conn)
 
     updated_policy = Enum.reduce(directives, existing_policy, fn directive, policy ->
-      Directive.validate_directive!(directive)
       ContentSecurityPolicy.add_source_value(policy, directive, nonce_source_value)
     end)
 
@@ -78,7 +80,7 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
 
   defp get_policy!(_) do
     raise """
-    Attempted to add a nonce to content security policy, but the content
+    Attempted to add a nonce to the content security policy, but the content
     security policy was not initialized.
 
     Please make sure that the `ContentSecurityPolicy.Plug.Setup` plug is run
