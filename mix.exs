@@ -4,11 +4,18 @@ defmodule ContentSecurityPolicy.MixProject do
   def project do
     [
       app: :content_security_policy,
-      version: "0.1.0",
-      elixir: "~> 1.7",
+      version: "1.0.0",
+      elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env()),
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: description(),
+      description: description(),
+      package: package(),
+      deps: deps(),
+      docs: docs(),
+      name: "ContentSecurityPolicy",
+      source_url: "https://github.com/mbramson/content_security_policy"
     ]
   end
 
@@ -34,4 +41,28 @@ defmodule ContentSecurityPolicy.MixProject do
     ]
   end
 
+  defp description do
+    """
+    ContentSecurityPolicy makes working with the `"Content-Security-Policy"`
+    response header simple.
+    """
+  end
+
+  defp package() do
+    [
+      files: ["lib", "mix.exs", "README.md", "LICENSE.md"],
+      maintainers: ["Mathew Bramson"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/mbramson/content_security_policy"}
+    ]
+  end
+
+  defp docs do
+    [main: "getting-started",
+     formatter_opts: [gfm: true],
+     source_url: "https://github.com/mbramson/content_security_policy",
+     extras: [
+       "docs/Getting Started.md"
+    ]]
+  end
 end
