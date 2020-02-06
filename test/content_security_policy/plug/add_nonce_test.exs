@@ -16,6 +16,15 @@ defmodule ContentSecurityPolicy.Plug.AddNonceTest do
     |> send_resp(200, "ok")
   end
 
+  defp send_response_with_preset_nonce(add_nonce_plug_opts \\ [], preset_nonce) do
+    :post
+    |> conn("/foo")
+    |> Map.merge(%{assigns: %{csp_nonce: preset_nonce}})
+    |> Setup.call([default_policy: %Policy{}])
+    |> AddNonce.call(add_nonce_plug_opts)
+    |> send_resp(200, "ok")
+  end
+
   describe "call/2" do
     test "adds a nonce to the default_src directive by default" do
       conn = send_response()
@@ -67,6 +76,14 @@ defmodule ContentSecurityPolicy.Plug.AddNonceTest do
         |> AddNonce.call([])
         |> send_resp(200, "ok")
       end)
+    end
+
+    test "does not set a new nonce if one has already been set" do
+
+      conn = send_response_with_preset_nonce([], "testnonce")
+      csp_nonce = conn.assigns[:csp_nonce]
+
+      assert csp_nonce == "testnonce"
     end
   end
 end
