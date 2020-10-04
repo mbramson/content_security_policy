@@ -11,7 +11,7 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
   In a controller or router:
 
       plug ContentSecurityPolicy.Setup
-      plug ContentSecurityPolicy.AddNonce directives: [:script_src]
+      plug ContentSecurityPolicy.AddNonce, directives: [:script_src]
 
   The nonce is then added to the `script-src` directive and will be sent in the
   "content-security-policy" response header. To access this nonce value when
