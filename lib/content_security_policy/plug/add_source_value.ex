@@ -44,7 +44,7 @@ defmodule ContentSecurityPolicy.Plug.AddSourceValue do
     opts
   end
 
-  def call(conn, []), do: raise_no_arguments_error()
+  def call(_conn, []), do: raise_no_arguments_error()
   def call(conn, opts) do
     existing_policy = get_policy!(conn)
 

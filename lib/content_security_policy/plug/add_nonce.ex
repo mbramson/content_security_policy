@@ -53,7 +53,7 @@ defmodule ContentSecurityPolicy.Plug.AddNonce do
     opts
   end
 
-  def call(%{assigns: %{csp_nonce: nonce}} = conn, opts), do: conn
+  def call(%{assigns: %{csp_nonce: _nonce}} = conn, _opts), do: conn
   def call(conn, opts) do
     directives = opts
                  |> Keyword.get(:directives, @default_directives)
