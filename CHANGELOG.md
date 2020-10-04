@@ -1,3 +1,7 @@
+# 1.0.2
+
+Fixes some unused variable warnings.
+
 # 1.0.1
 
 Added functionality to help with testing: does not set a new nonce if one has already been set.
