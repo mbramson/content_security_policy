@@ -1,3 +1,7 @@
+# 1.0.3
+
+Fixes some inaccurate documentation. No code change.
+
 # 1.0.2
 
 Fixes some unused variable warnings.
