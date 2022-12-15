@@ -12,7 +12,8 @@ defmodule ContentSecurityPolicy.Policy do
 
   @type t :: %Policy{}
 
-  defstruct child_src: nil,
+  defstruct base_uri: nil,
+    child_src: nil,
     connect_src: nil,
     default_src: nil,
     font_src: nil,
@@ -20,12 +21,19 @@ defmodule ContentSecurityPolicy.Policy do
     frame_ancestors: nil,
     frame_src: nil,
     img_src: nil,
+    manifest_src: nil,
     media_src: nil,
     object_src: nil,
     plugin_types: nil,
+    prefetch_src: nil,
     report_uri: nil,
     sandbox: nil,
     script_src: nil,
-    style_src: nil
+    script_src_attr: nil,
+    script_src_elem: nil,
+    style_src: nil,
+    style_src_elem: nil,
+    webrtc: nil,
+    worker_src: nil
 
 end
