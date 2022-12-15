@@ -35,7 +35,7 @@ defmodule ContentSecurityPolicy.MixProject do
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev},
-      {:mix_test_watch, "~> 0.6", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:plug, "~> 1.1"},
       {:order_invariant_compare, "~> 1.0.0", only: :test},
       {:stream_data, ">= 0.0.0", only: :test},

@@ -16,7 +16,7 @@ defmodule ContentSecurityPolicy.Plug.AddNonceTest do
     |> send_resp(200, "ok")
   end
 
-  defp send_response_with_preset_nonce(add_nonce_plug_opts \\ [], preset_nonce) do
+  defp send_response_with_preset_nonce(add_nonce_plug_opts, preset_nonce) do
     :post
     |> conn("/foo")
     |> Map.merge(%{assigns: %{csp_nonce: preset_nonce}})
