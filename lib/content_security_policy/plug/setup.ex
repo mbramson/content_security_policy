@@ -11,7 +11,7 @@ defmodule ContentSecurityPolicy.Plug.Setup do
   
   In a controller or router: 
 
-      plug ContentSecurityPolicy.Plug.Setup(
+      plug(ContentSecurityPolicy.Plug.Setup,
         default_policy: %ContentSecurityPolicy.Policy{
           default_src: ["https:", "'self'"],
           img_src: ["*.imgur.com"]
